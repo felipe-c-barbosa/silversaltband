@@ -10,7 +10,7 @@ const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
 export default defineConfig({
   name: 'silversalt',
   title: 'SilverSalt CMS',
-  projectId: projectId || 'yourProjectId',
+  projectId: projectId || 'seqw2iwb',
   dataset,
   plugins: [structureTool({ structure }), visionTool()],
   schema: { types: schemaTypes },

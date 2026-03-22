@@ -3,7 +3,7 @@ import type { GatsbyConfig } from 'gatsby'
 const projectId =
   process.env.GATSBY_SANITY_PROJECT_ID ||
   process.env.SANITY_PROJECT_ID ||
-  'yourProjectId'
+  'seqw2iwb'
 const dataset =
   process.env.GATSBY_SANITY_DATASET || process.env.SANITY_DATASET || 'production'
 
