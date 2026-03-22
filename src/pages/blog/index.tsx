@@ -50,10 +50,8 @@ export const query = graphql`
         excerpt
         publishedAt
         coverImage {
-          alt
           asset {
             url
-            _ref
           }
         }
       }

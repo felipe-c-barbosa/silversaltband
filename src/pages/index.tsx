@@ -12,7 +12,6 @@ type HomeData = {
       heroTitle?: string | null
       heroSupportText?: string | null
       logo?: {
-        alt?: string | null
         asset?: { url?: string | null } | null
       } | null
       musicProvider?: string | null
@@ -37,7 +36,7 @@ const IndexPage: React.FC<PageProps<HomeData>> = ({ data }) => {
   const heroTitle = s?.heroTitle || 'SilverSalt'
   const heroText = s?.heroSupportText
   const logoUrl = s?.logo?.asset?.url
-  const logoAlt = s?.logo?.alt || 'SilverSalt'
+  const logoAlt = 'SilverSalt'
 
   const startOfToday = new Date()
   startOfToday.setHours(0, 0, 0, 0)
@@ -140,7 +139,6 @@ export const query = graphql`
         heroTitle
         heroSupportText
         logo {
-          alt
           asset {
             url
           }

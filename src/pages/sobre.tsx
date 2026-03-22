@@ -4,7 +4,6 @@ import { graphql } from 'gatsby'
 import { Layout } from '../components/Layout'
 import { Seo } from '../components/Seo'
 import { PortableTextContent } from '../components/PortableTextContent'
-import { sanityImageUrl } from '../utils/sanityImageUrl'
 
 const ROLE_LABELS: Record<string, string> = {
   vocalista: 'Vocalista',
@@ -20,8 +19,7 @@ type SobreData = {
       title?: string | null
       _rawIntro?: unknown
       bandPhoto?: {
-        alt?: string | null
-        asset?: { url?: string | null; _ref?: string | null } | null
+        asset?: { url?: string | null } | null
       } | null
     }>
   }
@@ -32,8 +30,7 @@ type SobreData = {
       bio?: string | null
       sortOrder?: number | null
       photo?: {
-        alt?: string | null
-        asset?: { url?: string | null; _ref?: string | null } | null
+        asset?: { url?: string | null } | null
       } | null
     }>
   }
@@ -42,8 +39,7 @@ type SobreData = {
 const SobrePage: React.FC<PageProps<SobreData>> = ({ data }) => {
   const page = data.about.nodes[0]
   const title = page?.title || 'Sobre a banda'
-  const bandPhotoUrl =
-    page?.bandPhoto?.asset?.url || sanityImageUrl(page?.bandPhoto as never, 1200)
+  const bandPhotoUrl = page?.bandPhoto?.asset?.url
 
   const members = [...data.members.nodes].sort(
     (a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0)
@@ -57,7 +53,7 @@ const SobrePage: React.FC<PageProps<SobreData>> = ({ data }) => {
           <img
             className="article__cover"
             src={bandPhotoUrl}
-            alt={page?.bandPhoto?.alt || 'SilverSalt'}
+            alt="SilverSalt"
             loading="lazy"
             style={{ border: '3px solid rgba(100,215,66,0.4)' }}
           />
@@ -76,8 +72,7 @@ const SobrePage: React.FC<PageProps<SobreData>> = ({ data }) => {
         ) : (
           <div className="member-grid">
             {members.map((m, i) => {
-              const photo =
-                m.photo?.asset?.url || sanityImageUrl(m.photo as never, 600)
+              const photo = m.photo?.asset?.url
               const roleKey = m.role || ''
               return (
                 <article key={`${m.name}-${i}`} className="member-card">
@@ -85,7 +80,7 @@ const SobrePage: React.FC<PageProps<SobreData>> = ({ data }) => {
                     <img
                       className="member-card__photo"
                       src={photo}
-                      alt={m.photo?.alt || m.name || ''}
+                      alt={m.name || 'Integrante da SilverSalt'}
                       loading="lazy"
                     />
                   ) : (
@@ -123,10 +118,8 @@ export const query = graphql`
         title
         _rawIntro(resolveReferences: { maxDepth: 5 })
         bandPhoto {
-          alt
           asset {
             url
-            _ref
           }
         }
       }
@@ -138,10 +131,8 @@ export const query = graphql`
         bio
         sortOrder
         photo {
-          alt
           asset {
             url
-            _ref
           }
         }
       }

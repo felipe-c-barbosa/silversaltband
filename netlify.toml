@@ -11,6 +11,16 @@
 [[headers]]
   for = "/*"
   [headers.values]
+    # CSP atual:
+    # - fonts.googleapis.com / fonts.gstatic.com: Google Fonts carregadas no gatsby-ssr.tsx
+    # - *.instagram.com: script de embed e links/posts do Instagram
+    # - open.spotify.com e w.soundcloud.com: iframes do player de audio
+    # - 'unsafe-inline': necessario hoje por causa de scripts/estilos inline do Gatsby e estilos inline em componentes React
+    # Quando remover estilos inline e configurar nonce/hash no SSR, vale endurecer essa politica.
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self' 'unsafe-inline' https://*.instagram.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.instagram.com; frame-src 'self' https://*.instagram.com https://open.spotify.com https://w.soundcloud.com; media-src 'self' https: data:; manifest-src 'self'; upgrade-insecure-requests"
+    Permissions-Policy = "accelerometer=(), autoplay=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
+    X-Permitted-Cross-Domain-Policies = "none"
     Referrer-Policy = "strict-origin-when-cross-origin"

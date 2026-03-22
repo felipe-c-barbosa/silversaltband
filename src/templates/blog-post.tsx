@@ -17,7 +17,6 @@ type BlogPostData = {
     seoTitle?: string | null
     seoDescription?: string | null
     coverImage?: {
-      alt?: string | null
       asset?: { url?: string | null } | null
     } | null
     _rawBody?: unknown
@@ -61,7 +60,7 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostData, BlogPostContext>> = ({
         {post.excerpt ? <p className="lead">{post.excerpt}</p> : null}
         {cover ? (
           <div className="article__cover">
-            <img src={cover} alt={post.coverImage?.alt || post.title || ''} loading="lazy" />
+            <img src={cover} alt={post.title || 'Post da SilverSalt'} loading="lazy" />
           </div>
         ) : null}
         <PortableTextContent value={post._rawBody as never} />
@@ -94,7 +93,6 @@ export const query = graphql`
         current
       }
       coverImage {
-        alt
         asset {
           url
         }

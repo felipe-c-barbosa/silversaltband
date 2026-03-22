@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
-import { sanityImageUrl } from '../utils/sanityImageUrl'
 
 export type PostCardData = {
   slug: { current?: string | null } | null
@@ -8,8 +7,7 @@ export type PostCardData = {
   excerpt?: string | null
   publishedAt?: string | null
   coverImage?: {
-    alt?: string | null
-    asset?: { _ref?: string | null; url?: string | null } | null
+    asset?: { url?: string | null } | null
   } | null
 }
 
@@ -17,9 +15,7 @@ export function PostCard({ post }: { post: PostCardData }) {
   const slug = post.slug?.current
   if (!slug) return null
 
-  const coverSrc =
-    post.coverImage?.asset?.url ||
-    sanityImageUrl(post.coverImage as never, 800)
+  const coverSrc = post.coverImage?.asset?.url
 
   const date = post.publishedAt
     ? new Date(post.publishedAt).toLocaleDateString('pt-BR')
@@ -30,7 +26,7 @@ export function PostCard({ post }: { post: PostCardData }) {
       <Link to={`/blog/${slug}/`} style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="card__media">
           {coverSrc ? (
-            <img src={coverSrc} alt={post.coverImage?.alt || post.title || ''} loading="lazy" />
+            <img src={coverSrc} alt={post.title || 'Post da SilverSalt'} loading="lazy" />
           ) : (
             <div
               style={{
