@@ -67,15 +67,7 @@ export const siteSettings = defineType({
       name: 'socialLinks',
       title: 'Redes sociais',
       type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({ name: 'label', type: 'string', title: 'Rótulo' }),
-            defineField({ name: 'url', type: 'url', title: 'URL' }),
-          ],
-        },
-      ],
+      of: [{type: 'socialLink'}],
     }),
   ],
   preview: {

@@ -9,13 +9,23 @@ Site estático da banda **SilverSalt**: conteúdo no **Sanity**, build com **Gat
 
 ## 1. Sanity Studio
 
+Este repositório já inclui o Content Studio em **`studio/`** (schemas, desk e Sanity v5). Use **somente** essa pasta para `npm install` e `npm run dev`.
+
+**Importante:** não execute `npm create sanity@latest` **dentro** de `studio/` se a pasta já existir com conteúdo — o comando cria uma **subpasta** nova (ex.: `studio/nome-do-projeto/`) e duplica o Studio. Para um projeto novo do zero, rode o create na pasta **pai** onde o Studio deve ficar, ou use `sanity init` e copie os schemas deste repo.
+
 ```bash
 cd studio
 cp .env.example .env
-# Edite .env com SANITY_STUDIO_PROJECT_ID e SANITY_STUDIO_DATASET
+# Opcional: SANITY_STUDIO_PROJECT_ID e SANITY_STUDIO_DATASET (já há fallback seqw2iwb / production no código)
 
 npm install
 npm run dev
+```
+
+**GraphQL (necessário para o build Gatsby / Netlify):** após `sanity login`, na pasta `studio/`:
+
+```bash
+npm run deploy-graphql
 ```
 
 No Studio, crie os documentos singleton pelo menu lateral:
@@ -26,7 +36,7 @@ No Studio, crie os documentos singleton pelo menu lateral:
 
 Adicione integrantes (`member`), eventos (`event`) e posts (`post`).
 
-> Se o projeto Sanity ainda não existir: `npm create sanity@latest -- --template clean` na pasta `studio` ou `sanity init` e alinhe os schemas deste repositório.
+> Se ainda não tiver projeto no Sanity.io, crie um em [sanity.io/manage](https://www.sanity.io/manage) e aponte o ID no `.env` / fallbacks, ou use `sanity init` numa pasta vazia e migre os arquivos de `studio/schemaTypes` e `deskStructure.ts` deste repositório.
 
 ## 2. Gatsby (site)
 
