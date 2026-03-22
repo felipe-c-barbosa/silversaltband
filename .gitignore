@@ -1,0 +1,10 @@
+node_modules/
+.cache/
+public/
+studio/node_modules/
+studio/dist/
+.env
+.env.*
+!.env.example
+.DS_Store
+*.log
