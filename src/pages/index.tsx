@@ -85,6 +85,10 @@ const IndexPage: React.FC<PageProps<HomeData>> = ({ data }) => {
             <span />
             <span />
             <span />
+            <span />
+            <span />
+            <span />
+            <span />
           </div>
         </aside>
       </section>
