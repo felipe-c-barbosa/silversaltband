@@ -12,18 +12,24 @@ export function Footer({ socialLinks }: FooterProps) {
   return (
     <footer className="site-footer">
       <div className="site-footer__inner">
-        <p style={{ margin: 0, opacity: 0.85 }}>
-          © {new Date().getFullYear()} SilverSalt
-        </p>
-        {links.length > 0 ? (
-          <div className="site-footer__social">
-            {links.map((link, i) => (
-              <a key={`${link.url}-${i}`} href={link.url!} rel="noopener noreferrer">
-                {link.label || link.url}
-              </a>
-            ))}
-          </div>
-        ) : null}
+        <div className="site-footer__brand">
+          <p className="site-footer__eyebrow">SilverSalt</p>
+          <p className="site-footer__copy">
+            Riffs marcantes, baladas poderosas e presença de palco.
+          </p>
+        </div>
+        <div className="site-footer__meta">
+          {links.length > 0 ? (
+            <div className="site-footer__social">
+              {links.map((link, i) => (
+                <a key={`${link.url}-${i}`} href={link.url!} rel="noopener noreferrer">
+                  {link.label || link.url}
+                </a>
+              ))}
+            </div>
+          ) : null}
+          <p className="site-footer__legal">© {new Date().getFullYear()} SilverSalt</p>
+        </div>
       </div>
     </footer>
   )

@@ -41,30 +41,27 @@ export function InstagramSection({ intro, urls }: InstagramSectionProps) {
   return (
     <section className="section" aria-label="Instagram">
       <div className="section__head">
-        <h2>Instagram</h2>
+        <div className="section__title-group">
+          <p className="section__eyebrow">Social</p>
+          <h2>Instagram</h2>
+        </div>
       </div>
       {intro ? <p className="lead">{intro}</p> : null}
-      <div className="instagram-grid">
-        {list.map((href) => (
-          <blockquote
-            key={href}
-            className="instagram-media"
-            data-instgrm-permalink={href}
-            data-instgrm-version="14"
-            style={{
-              background: 'rgba(242,240,239,0.04)',
-              border: '2px solid rgba(100,215,66,0.25)',
-              margin: 0,
-              maxWidth: '100%',
-              minWidth: '260px',
-              padding: '1rem',
-            }}
-          >
-            <a href={href} target="_blank" rel="noopener noreferrer">
-              Ver no Instagram
-            </a>
-          </blockquote>
-        ))}
+      <div className="section__frame">
+        <div className="instagram-grid">
+          {list.map((href) => (
+            <blockquote
+              key={href}
+              className="instagram-media instagram-card"
+              data-instgrm-permalink={href}
+              data-instgrm-version="14"
+            >
+              <a href={href} target="_blank" rel="noopener noreferrer">
+                Ver no Instagram
+              </a>
+            </blockquote>
+          ))}
+        </div>
       </div>
     </section>
   )

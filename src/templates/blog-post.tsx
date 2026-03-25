@@ -52,10 +52,10 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostData, BlogPostContext>> = ({
   return (
     <Layout>
       <article className="article">
-        <p style={{ marginBottom: '0.5rem' }}>
+        <p className="article__back">
           <Link to="/blog/">← Blog</Link>
         </p>
-        {date ? <p className="card__meta">{date}</p> : null}
+        {date ? <p className="article__meta">{date}</p> : null}
         <h1>{post.title}</h1>
         {post.excerpt ? <p className="lead">{post.excerpt}</p> : null}
         {cover ? (

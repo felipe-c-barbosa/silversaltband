@@ -47,23 +47,28 @@ const SobrePage: React.FC<PageProps<SobreData>> = ({ data }) => {
 
   return (
     <Layout>
-      <h1>{title}</h1>
-      {bandPhotoUrl ? (
-        <p style={{ marginBottom: '1.5rem' }}>
-          <img
-            className="article__cover"
-            src={bandPhotoUrl}
-            alt="SilverSalt"
-            loading="lazy"
-            style={{ border: '3px solid rgba(100,215,66,0.4)' }}
-          />
+      <section className="page-hero page-hero--about">
+        <p className="page-hero__eyebrow">Identidade</p>
+        <h1>{title}</h1>
+        <p className="page-hero__lead">
+          Uma presença visual e sonora construída para riffs fortes, refrões amplos e palco.
         </p>
+      </section>
+      {bandPhotoUrl ? (
+        <div className="about-band__photo-wrap">
+          <img className="about-band__photo" src={bandPhotoUrl} alt="SilverSalt" loading="lazy" />
+        </div>
       ) : null}
-      <PortableTextContent value={page?._rawIntro as never} />
+      <div className="about-band__story prose-block">
+        <PortableTextContent value={page?._rawIntro as never} />
+      </div>
 
-      <section className="section" style={{ marginTop: '3rem' }}>
+      <section className="section section--members">
         <div className="section__head">
-          <h2>Integrantes</h2>
+          <div className="section__title-group">
+            <p className="section__eyebrow">Lineup</p>
+            <h2>Integrantes</h2>
+          </div>
         </div>
         {members.length === 0 ? (
           <p className="empty-state">
@@ -76,25 +81,24 @@ const SobrePage: React.FC<PageProps<SobreData>> = ({ data }) => {
               const roleKey = m.role || ''
               return (
                 <article key={`${m.name}-${i}`} className="member-card">
-                  {photo ? (
-                    <img
-                      className="member-card__photo"
-                      src={photo}
-                      alt={m.name || 'Integrante da SilverSalt'}
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div
-                      className="member-card__photo"
-                      style={{
-                        background: 'linear-gradient(160deg, #1f2230, #64d74233)',
-                      }}
-                      aria-hidden
-                    />
-                  )}
-                  <p className="member-card__role">{ROLE_LABELS[roleKey] || roleKey}</p>
-                  <h3 className="member-card__name">{m.name}</h3>
-                  {m.bio ? <p style={{ margin: 0, fontSize: '0.95rem', opacity: 0.9 }}>{m.bio}</p> : null}
+                  <p className="member-card__index">{String(i + 1).padStart(2, '0')}</p>
+                  <div className="member-card__photo-wrap">
+                    {photo ? (
+                      <img
+                        className="member-card__photo"
+                        src={photo}
+                        alt={m.name || 'Integrante da SilverSalt'}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="member-card__photo member-card__photo--fallback" aria-hidden />
+                    )}
+                  </div>
+                  <div className="member-card__body">
+                    <p className="member-card__role">{ROLE_LABELS[roleKey] || roleKey}</p>
+                    <h3 className="member-card__name">{m.name}</h3>
+                    {m.bio ? <p className="member-card__bio">{m.bio}</p> : null}
+                  </div>
                 </article>
               )
             })}

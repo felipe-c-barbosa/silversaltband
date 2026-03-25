@@ -3,6 +3,7 @@ import type { HeadFC, PageProps } from 'gatsby'
 import { graphql } from 'gatsby'
 import { Layout } from '../components/Layout'
 import { Seo } from '../components/Seo'
+import { getEventDateParts } from '../utils/eventDateParts'
 
 type AgendaData = {
   events: {
@@ -30,49 +31,60 @@ const AgendaPage: React.FC<PageProps<AgendaData>> = ({ data }) => {
 
   return (
     <Layout>
-      <h1>Agenda</h1>
-      <p className="lead" style={{ maxWidth: '40rem' }}>
-        Shows e apresentações. Links de ingressos quando disponíveis.
-      </p>
+      <section className="page-hero page-hero--tour">
+        <p className="page-hero__eyebrow">Ao vivo</p>
+        <h1>Agenda</h1>
+        <p className="page-hero__lead">
+          Shows, apresentações e próximas oportunidades para ver a SilverSalt no volume certo.
+        </p>
+      </section>
 
       <section className="section">
         <div className="section__head">
-          <h2>Próximos</h2>
+          <div className="section__title-group">
+            <p className="section__eyebrow">Turnê</p>
+            <h2>Próximos</h2>
+          </div>
         </div>
         {upcoming.length === 0 ? (
           <p className="empty-state">Nenhum show futuro cadastrado ainda.</p>
         ) : (
           <ul className="event-list">
-            {upcoming.map((e, i) => (
-              <li
-                key={`${e.title}-${e.datetime}-${i}`}
-                className={`event-item${e.featured ? ' event-item--featured' : ''}`}
-              >
-                <div className="event-item__date">
-                  {e.datetime
-                    ? new Date(e.datetime).toLocaleDateString('pt-BR', {
-                        weekday: 'short',
-                        day: '2-digit',
-                        month: 'short',
-                        year: 'numeric',
-                      })
-                    : null}
-                </div>
-                <div>
-                  <h3 className="event-item__title">{e.title}</h3>
-                  <p className="event-item__meta">
-                    {[e.venueName, e.city].filter(Boolean).join(' · ')}
-                  </p>
-                </div>
-                {e.ticketUrl ? (
-                  <a className="btn btn--ghost" href={e.ticketUrl} rel="noopener noreferrer">
-                    Ingressos
-                  </a>
-                ) : (
-                  <span />
-                )}
-              </li>
-            ))}
+            {upcoming.map((e, i) => {
+              const date = e.datetime ? getEventDateParts(e.datetime) : null
+
+              return (
+                <li
+                  key={`${e.title}-${e.datetime}-${i}`}
+                  className={`event-item${e.featured ? ' event-item--featured' : ''}`}
+                >
+                  {date ? (
+                    <div className="event-item__date">
+                      {date.weekday ? <span className="event-item__weekday">{date.weekday}</span> : null}
+                      <span className="event-item__day">{date.day}</span>
+                      <span className="event-item__month">{date.month}</span>
+                      <span className="event-item__year">{date.year}</span>
+                    </div>
+                  ) : null}
+                  <div className="event-item__content">
+                    {e.featured ? <p className="event-item__tag">Show em destaque</p> : null}
+                    <h3 className="event-item__title">{e.title}</h3>
+                    <p className="event-item__meta">
+                      {[e.venueName, e.city].filter(Boolean).join(' · ')}
+                    </p>
+                  </div>
+                  <div className="event-item__cta">
+                    {e.ticketUrl ? (
+                      <a className="btn btn--ghost" href={e.ticketUrl} rel="noopener noreferrer">
+                        Ingressos
+                      </a>
+                    ) : (
+                      <span className="event-item__status">Ingressos em breve</span>
+                    )}
+                  </div>
+                </li>
+              )
+            })}
           </ul>
         )}
       </section>
@@ -80,31 +92,37 @@ const AgendaPage: React.FC<PageProps<AgendaData>> = ({ data }) => {
       {past.length > 0 ? (
         <section className="section">
           <div className="section__head">
-            <h2>Anteriores</h2>
+            <div className="section__title-group">
+              <p className="section__eyebrow">Arquivo</p>
+              <h2>Anteriores</h2>
+            </div>
           </div>
           <ul className="event-list">
             {past
               .slice()
               .reverse()
-              .map((e, i) => (
-                <li key={`past-${e.title}-${e.datetime}-${i}`} className="event-item">
-                  <div className="event-item__date">
-                    {e.datetime
-                      ? new Date(e.datetime).toLocaleDateString('pt-BR', {
-                          day: '2-digit',
-                          month: 'short',
-                          year: 'numeric',
-                        })
-                      : null}
-                  </div>
-                  <div>
-                    <h3 className="event-item__title">{e.title}</h3>
-                    <p className="event-item__meta">
-                      {[e.venueName, e.city].filter(Boolean).join(' · ')}
-                    </p>
-                  </div>
-                </li>
-              ))}
+              .map((e, i) => {
+                const date = e.datetime ? getEventDateParts(e.datetime, false) : null
+
+                return (
+                  <li key={`past-${e.title}-${e.datetime}-${i}`} className="event-item event-item--past">
+                    {date ? (
+                      <div className="event-item__date">
+                        <span className="event-item__day">{date.day}</span>
+                        <span className="event-item__month">{date.month}</span>
+                        <span className="event-item__year">{date.year}</span>
+                      </div>
+                    ) : null}
+                    <div className="event-item__content">
+                      <p className="event-item__tag">Arquivo</p>
+                      <h3 className="event-item__title">{e.title}</h3>
+                      <p className="event-item__meta">
+                        {[e.venueName, e.city].filter(Boolean).join(' · ')}
+                      </p>
+                    </div>
+                  </li>
+                )
+              })}
           </ul>
         </section>
       ) : null}

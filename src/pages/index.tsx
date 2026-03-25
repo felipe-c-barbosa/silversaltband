@@ -5,6 +5,7 @@ import { Layout } from '../components/Layout'
 import { Seo } from '../components/Seo'
 import { AudioEmbed } from '../components/AudioEmbed'
 import { InstagramSection } from '../components/InstagramSection'
+import { getEventDateParts } from '../utils/eventDateParts'
 
 type HomeData = {
   settings: {
@@ -44,25 +45,13 @@ const IndexPage: React.FC<PageProps<HomeData>> = ({ data }) => {
     (e) => e.datetime && new Date(e.datetime) >= startOfToday
   )
   const nextShow = nextShows[0]
+  const nextShowDate = nextShow?.datetime ? getEventDateParts(nextShow.datetime) : null
 
   return (
     <Layout>
       <section className="hero-home">
-        <div className="hero-home__logo">
-          {logoUrl ? (
-            <img src={logoUrl} alt={logoAlt} width={400} height={400} />
-          ) : (
-            <div
-              aria-hidden
-              style={{
-                aspectRatio: '1',
-                background: 'linear-gradient(145deg, #64d74244, #13141b)',
-                border: '3px solid #64d742',
-              }}
-            />
-          )}
-        </div>
-        <div className="hero-home__text">
+        <div className="hero-home__content">
+          <p className="page-hero__eyebrow">Rock alternativo · alto contraste · presença ao vivo</p>
           <h1>{heroTitle}</h1>
           {heroText ? (
             <p className="lead">{heroText}</p>
@@ -71,7 +60,12 @@ const IndexPage: React.FC<PageProps<HomeData>> = ({ data }) => {
               Rock com cara de cartaz — som cru, alto contraste e muito groove.
             </p>
           )}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '1.5rem' }}>
+          <ul className="hero-home__traits" aria-label="Assinatura sonora da banda">
+            <li>Riffs marcantes</li>
+            <li>Baladas poderosas</li>
+            <li>Palco e estrada</li>
+          </ul>
+          <div className="hero-home__actions">
             <Link className="btn" to="/agenda/">
               Ver agenda
             </Link>
@@ -83,37 +77,61 @@ const IndexPage: React.FC<PageProps<HomeData>> = ({ data }) => {
             </Link>
           </div>
         </div>
+        <aside className="hero-home__aside" aria-label="Identidade visual">
+          <div className="hero-home__logo">
+            {logoUrl ? (
+              <img src={logoUrl} alt={logoAlt} width={400} height={400} />
+            ) : (
+              <div className="hero-home__logo-fallback" aria-hidden />
+            )}
+          </div>
+          <div className="hero-home__stamp">
+            <p className="hero-home__stamp-label">SilverSalt Live Signal</p>
+            <p className="hero-home__stamp-copy">
+              Peso, refrão e atmosfera em uma linguagem de palco, estúdio e estrada.
+            </p>
+          </div>
+        </aside>
       </section>
 
       {nextShow ? (
         <section className="section" aria-label="Próximo show">
           <div className="section__head">
-            <h2>Próximo show</h2>
+            <div className="section__title-group">
+              <p className="section__eyebrow">Ao vivo</p>
+              <h2>Próximo show</h2>
+            </div>
             <Link className="btn btn--ghost" to="/agenda/">
               Agenda completa
             </Link>
           </div>
           <article className="event-item event-item--featured">
-            <div className="event-item__date">
-              {nextShow.datetime
-                ? new Date(nextShow.datetime).toLocaleDateString('pt-BR', {
-                    weekday: 'short',
-                    day: '2-digit',
-                    month: 'short',
-                  })
-                : null}
-            </div>
-            <div>
+            {nextShowDate ? (
+              <div className="event-item__date">
+                {nextShowDate.weekday ? (
+                  <span className="event-item__weekday">{nextShowDate.weekday}</span>
+                ) : null}
+                <span className="event-item__day">{nextShowDate.day}</span>
+                <span className="event-item__month">{nextShowDate.month}</span>
+                <span className="event-item__year">{nextShowDate.year}</span>
+              </div>
+            ) : null}
+            <div className="event-item__content">
+              <p className="event-item__tag">Show em destaque</p>
               <h3 className="event-item__title">{nextShow.title}</h3>
               <p className="event-item__meta">
                 {[nextShow.venueName, nextShow.city].filter(Boolean).join(' · ')}
               </p>
             </div>
-            {nextShow.ticketUrl ? (
-              <a className="btn" href={nextShow.ticketUrl} rel="noopener noreferrer">
-                Ingressos
-              </a>
-            ) : null}
+            <div className="event-item__cta">
+              {nextShow.ticketUrl ? (
+                <a className="btn" href={nextShow.ticketUrl} rel="noopener noreferrer">
+                  Ingressos
+                </a>
+              ) : (
+                <span className="event-item__status">Mais detalhes em breve</span>
+              )}
+            </div>
           </article>
         </section>
       ) : null}

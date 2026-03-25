@@ -15,16 +15,21 @@ export function AudioEmbed({ provider, shareUrl }: AudioEmbedProps) {
   return (
     <section className="section" aria-label="Player de música">
       <div className="section__head">
-        <h2>Ouça</h2>
+        <div className="section__title-group">
+          <p className="section__eyebrow">Streaming</p>
+          <h2>Ouça</h2>
+        </div>
       </div>
-      <div className="embed-wrap">
-        <iframe
-          title="Player SilverSalt"
-          src={src}
-          height={height}
-          allow="encrypted-media; clipboard-write"
-          loading="lazy"
-        />
+      <div className="section__frame">
+        <div className="embed-wrap">
+          <iframe
+            title="Player SilverSalt"
+            src={src}
+            height={height}
+            allow="encrypted-media; clipboard-write"
+            loading="lazy"
+          />
+        </div>
       </div>
     </section>
   )

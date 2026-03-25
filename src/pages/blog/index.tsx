@@ -16,14 +16,17 @@ const BlogIndexPage: React.FC<PageProps<BlogIndexData>> = ({ data }) => {
 
   return (
     <Layout>
-      <h1>Blog</h1>
-      <p className="lead" style={{ maxWidth: '40rem' }}>
-        Novidades, bastidores e o que rolou nos ensaios.
-      </p>
+      <section className="page-hero page-hero--blog">
+        <p className="page-hero__eyebrow">Bastidores</p>
+        <h1>Blog</h1>
+        <p className="page-hero__lead">
+          Novidades, ensaios, processo criativo e tudo o que acontece entre o estúdio e o palco.
+        </p>
+      </section>
       {posts.length === 0 ? (
         <p className="empty-state">Nenhum post publicado ainda. Crie conteúdo no Sanity.</p>
       ) : (
-        <ul className="card-grid" style={{ marginTop: '2rem' }}>
+        <ul className="card-grid card-grid--posts">
           {posts.map((post) => (
             <PostCard key={post.slug?.current || post.title} post={post} />
           ))}

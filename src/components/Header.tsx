@@ -18,7 +18,8 @@ export function Header() {
     <header className="site-header">
       <div className="site-header__inner">
         <Link className="site-logo" to="/">
-          SilverSalt
+          <span className="site-logo__mark">SilverSalt</span>
+          <span className="site-logo__tag">Rock alternativo para palco e estrada</span>
         </Link>
         <nav aria-label="Principal">
           <ul className="site-nav">

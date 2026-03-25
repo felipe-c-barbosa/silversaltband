@@ -23,28 +23,20 @@ export function PostCard({ post }: { post: PostCardData }) {
 
   return (
     <li className="card">
-      <Link to={`/blog/${slug}/`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <Link className="card__link" to={`/blog/${slug}/`}>
         <div className="card__media">
           {coverSrc ? (
             <img src={coverSrc} alt={post.title || 'Post da SilverSalt'} loading="lazy" />
           ) : (
-            <div
-              style={{
-                width: '100%',
-                height: '100%',
-                background: 'linear-gradient(135deg, #1a1c26, #64d74233)',
-              }}
-              aria-hidden
-            />
+            <div className="card__media-fallback" aria-hidden />
           )}
+          <span className="card__media-overlay" aria-hidden />
         </div>
         <div className="card__body">
           {date ? <p className="card__meta">{date}</p> : null}
           <h3 className="card__title">{post.title}</h3>
           {post.excerpt ? <p className="card__excerpt">{post.excerpt}</p> : null}
-          <span className="btn btn--ghost" style={{ alignSelf: 'flex-start' }}>
-            Ler mais
-          </span>
+          <span className="card__cta">Ler mais</span>
         </div>
       </Link>
     </li>

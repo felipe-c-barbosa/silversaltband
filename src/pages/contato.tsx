@@ -27,58 +27,77 @@ const ContatoPage: React.FC<PageProps<ContatoData>> = ({ data }) => {
 
   return (
     <Layout>
-      <h1>{title}</h1>
-      <PortableTextContent value={page?._rawIntro as never} />
-
-      {page?.bookingEmail ? (
-        <p>
-          <strong>Booking:</strong>{' '}
-          <a href={`mailto:${page.bookingEmail}`}>{page.bookingEmail}</a>
+      <section className="page-hero page-hero--contact">
+        <p className="page-hero__eyebrow">Booking e imprensa</p>
+        <h1>{title}</h1>
+        <p className="page-hero__lead">
+          Entre em contato para shows, collabs, imprensa e oportunidades ligadas ao projeto.
         </p>
-      ) : null}
+      </section>
 
-      {submitted ? (
-        <p role="status" style={{ color: 'var(--color-accent)', fontWeight: 600 }}>
-          Mensagem enviada — obrigado! Entraremos em contato em breve.
-        </p>
-      ) : null}
+      <section className="contact-layout">
+        <div className="contact-copy">
+          <div className="contact-panel prose-block">
+            <PortableTextContent value={page?._rawIntro as never} />
+          </div>
 
-      <section className="section" style={{ marginTop: '2rem' }}>
-        <div className="section__head">
-          <h2>Envie uma mensagem</h2>
+          {page?.bookingEmail ? (
+            <div className="contact-booking">
+              <p className="contact-booking__label">Booking</p>
+              <a className="contact-booking__link" href={`mailto:${page.bookingEmail}`}>
+                {page.bookingEmail}
+              </a>
+            </div>
+          ) : null}
+
+          {submitted ? (
+            <p role="status" className="contact-status">
+              Mensagem enviada. Obrigado! Entraremos em contato em breve.
+            </p>
+          ) : null}
         </div>
-        <form
-          className="form-grid"
-          style={{ position: 'relative' }}
-          name="contact"
-          method="POST"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-          action="/contato/?submitted=1"
-        >
-          <input type="hidden" name="form-name" value="contact" />
-          <p style={{ position: 'absolute', left: '-9999px' }} aria-hidden>
+
+        <section className="contact-form-panel">
+          <div className="section__head">
+            <div className="section__title-group">
+              <p className="section__eyebrow">Mensagem direta</p>
+              <h2>Envie uma mensagem</h2>
+            </div>
+          </div>
+          <form
+            className="form-grid contact-form"
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            action="/contato/?submitted=1"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p className="form-honeypot" aria-hidden>
+              <label>
+                Não preencha:
+                <input name="bot-field" />
+              </label>
+            </p>
             <label>
-              Não preencha:
-              <input name="bot-field" />
+              Nome
+              <input name="name" type="text" required autoComplete="name" />
             </label>
-          </p>
-          <label>
-            Nome
-            <input name="name" type="text" required autoComplete="name" />
-          </label>
-          <label>
-            E-mail
-            <input name="email" type="email" required autoComplete="email" />
-          </label>
-          <label>
-            Mensagem
-            <textarea name="message" required />
-          </label>
-          <button type="submit" className="btn">
-            Enviar
-          </button>
-        </form>
+            <label>
+              E-mail
+              <input name="email" type="email" required autoComplete="email" />
+            </label>
+            <label>
+              Mensagem
+              <textarea name="message" required />
+            </label>
+            <div className="form-actions">
+              <button type="submit" className="btn">
+                Enviar
+              </button>
+            </div>
+          </form>
+        </section>
       </section>
     </Layout>
   )
