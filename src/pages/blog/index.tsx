@@ -17,11 +17,15 @@ const BlogIndexPage: React.FC<PageProps<BlogIndexData>> = ({ data }) => {
   return (
     <Layout>
       <section className="page-hero page-hero--blog">
-        <p className="page-hero__eyebrow">Bastidores</p>
-        <h1>Blog</h1>
-        <p className="page-hero__lead">
-          Novidades, ensaios, processo criativo e tudo o que acontece entre o estúdio e o palco.
-        </p>
+        <div className="page-hero__copy">
+          <h1>Blog</h1>
+        </div>
+        <div className="page-hero__art" aria-hidden>
+          <span className="page-hero__bar page-hero__bar--mid" />
+          <span className="page-hero__bar page-hero__bar--tall" />
+          <span className="page-hero__bar page-hero__bar--small" />
+          <span className="page-hero__line" />
+        </div>
       </section>
       {posts.length === 0 ? (
         <p className="empty-state">Nenhum post publicado ainda. Crie conteúdo no Sanity.</p>

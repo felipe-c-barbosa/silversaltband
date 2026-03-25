@@ -48,11 +48,15 @@ const SobrePage: React.FC<PageProps<SobreData>> = ({ data }) => {
   return (
     <Layout>
       <section className="page-hero page-hero--about">
-        <p className="page-hero__eyebrow">Identidade</p>
-        <h1>{title}</h1>
-        <p className="page-hero__lead">
-          Uma presença visual e sonora construída para riffs fortes, refrões amplos e palco.
-        </p>
+        <div className="page-hero__copy">
+          <h1>{title}</h1>
+        </div>
+        <div className="page-hero__art" aria-hidden>
+          <span className="page-hero__bar page-hero__bar--small" />
+          <span className="page-hero__bar page-hero__bar--mid" />
+          <span className="page-hero__bar page-hero__bar--tall" />
+          <span className="page-hero__line" />
+        </div>
       </section>
       {bandPhotoUrl ? (
         <div className="about-band__photo-wrap">

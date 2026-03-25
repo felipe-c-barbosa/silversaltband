@@ -14,9 +14,11 @@ export function Footer({ socialLinks }: FooterProps) {
       <div className="site-footer__inner">
         <div className="site-footer__brand">
           <p className="site-footer__eyebrow">SilverSalt</p>
-          <p className="site-footer__copy">
-            Riffs marcantes, baladas poderosas e presença de palco.
-          </p>
+          <div className="site-footer__marks" aria-hidden>
+            <span />
+            <span />
+            <span />
+          </div>
         </div>
         <div className="site-footer__meta">
           {links.length > 0 ? (

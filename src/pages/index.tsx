@@ -51,7 +51,6 @@ const IndexPage: React.FC<PageProps<HomeData>> = ({ data }) => {
     <Layout>
       <section className="hero-home">
         <div className="hero-home__content">
-          <p className="page-hero__eyebrow">Rock alternativo · alto contraste · presença ao vivo</p>
           <h1>{heroTitle}</h1>
           {heroText ? (
             <p className="lead">{heroText}</p>
@@ -60,11 +59,6 @@ const IndexPage: React.FC<PageProps<HomeData>> = ({ data }) => {
               Rock com cara de cartaz — som cru, alto contraste e muito groove.
             </p>
           )}
-          <ul className="hero-home__traits" aria-label="Assinatura sonora da banda">
-            <li>Riffs marcantes</li>
-            <li>Baladas poderosas</li>
-            <li>Palco e estrada</li>
-          </ul>
           <div className="hero-home__actions">
             <Link className="btn" to="/agenda/">
               Ver agenda
@@ -85,11 +79,12 @@ const IndexPage: React.FC<PageProps<HomeData>> = ({ data }) => {
               <div className="hero-home__logo-fallback" aria-hidden />
             )}
           </div>
-          <div className="hero-home__stamp">
-            <p className="hero-home__stamp-label">SilverSalt Live Signal</p>
-            <p className="hero-home__stamp-copy">
-              Peso, refrão e atmosfera em uma linguagem de palco, estúdio e estrada.
-            </p>
+          <div className="hero-home__signal" aria-hidden>
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
           </div>
         </aside>
       </section>

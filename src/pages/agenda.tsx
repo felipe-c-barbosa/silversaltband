@@ -32,11 +32,15 @@ const AgendaPage: React.FC<PageProps<AgendaData>> = ({ data }) => {
   return (
     <Layout>
       <section className="page-hero page-hero--tour">
-        <p className="page-hero__eyebrow">Ao vivo</p>
-        <h1>Agenda</h1>
-        <p className="page-hero__lead">
-          Shows, apresentações e próximas oportunidades para ver a SilverSalt no volume certo.
-        </p>
+        <div className="page-hero__copy">
+          <h1>Agenda</h1>
+        </div>
+        <div className="page-hero__art" aria-hidden>
+          <span className="page-hero__bar page-hero__bar--tall" />
+          <span className="page-hero__bar page-hero__bar--mid" />
+          <span className="page-hero__bar page-hero__bar--small" />
+          <span className="page-hero__line" />
+        </div>
       </section>
 
       <section className="section">

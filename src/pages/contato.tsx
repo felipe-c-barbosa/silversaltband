@@ -28,11 +28,15 @@ const ContatoPage: React.FC<PageProps<ContatoData>> = ({ data }) => {
   return (
     <Layout>
       <section className="page-hero page-hero--contact">
-        <p className="page-hero__eyebrow">Booking e imprensa</p>
-        <h1>{title}</h1>
-        <p className="page-hero__lead">
-          Entre em contato para shows, collabs, imprensa e oportunidades ligadas ao projeto.
-        </p>
+        <div className="page-hero__copy">
+          <h1>{title}</h1>
+        </div>
+        <div className="page-hero__art" aria-hidden>
+          <span className="page-hero__bar page-hero__bar--tall" />
+          <span className="page-hero__bar page-hero__bar--small" />
+          <span className="page-hero__bar page-hero__bar--mid" />
+          <span className="page-hero__line" />
+        </div>
       </section>
 
       <section className="contact-layout">
