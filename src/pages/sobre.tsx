@@ -85,7 +85,6 @@ const SobrePage: React.FC<PageProps<SobreData>> = ({ data }) => {
               const roleKey = m.role || ''
               return (
                 <article key={`${m.name}-${i}`} className="member-card">
-                  <p className="member-card__index">{String(i + 1).padStart(2, '0')}</p>
                   <div className="member-card__photo-wrap">
                     {photo ? (
                       <img

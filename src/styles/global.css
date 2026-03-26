@@ -140,7 +140,6 @@ p {
 .page-hero__eyebrow,
 .section__eyebrow,
 .card__meta,
-.member-card__index,
 .event-item__tag,
 .contact-booking__label,
 .site-footer__eyebrow {
@@ -855,14 +854,6 @@ p {
     linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
     rgba(12, 13, 16, 0.8);
   box-shadow: var(--shadow-panel);
-}
-
-.member-card__index {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  margin: 0;
-  color: var(--color-metal);
 }
 
 .member-card__photo-wrap {
