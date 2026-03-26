@@ -847,6 +847,8 @@ p {
 
 .member-card {
   position: relative;
+  width: min(100%, 18rem);
+  margin: 0 auto;
   padding: 1rem;
   border: 1px solid var(--color-line);
   background:
@@ -865,8 +867,11 @@ p {
 
 .member-card__photo-wrap {
   overflow: hidden;
-  aspect-ratio: 0.92;
+  width: min(100%, 15rem);
+  max-width: 240px;
+  aspect-ratio: 4 / 5;
   margin-bottom: 1rem;
+  margin-inline: auto;
   border: 1px solid var(--color-line);
   background: linear-gradient(160deg, #1f2230, rgba(125, 255, 77, 0.22));
 }
